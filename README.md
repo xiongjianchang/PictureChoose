@@ -4,7 +4,7 @@ Choose from camera or photo album pictures。图片选择来源于相机或相�
 
 ##特色
 * 以工具类的形式集成于项目里面
-* 直接实例化对象，并设置其属性就定制选择的需求
+* 直接实例化对象，并设置其属性就定制选择图片的需求
 * 支持相机拍照和选择相册照片
 * 支持图片的裁剪和压缩
 * 目前相册选择只支持选择单张
@@ -139,37 +139,4 @@ public class MainActivity extends AppCompatActivity {
 
 ```
 
-getView中回调，类似ListView等用法。
-
-### 对于选中状态
-
-你还在复杂的写代码设置选中后标签的显示效果么，翔哥说No!
-
-```java
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/tag_select_textcolor"
-          android:drawable="@drawable/checked_bg"
-          android:state_checked="true"></item>
-    <item android:drawable="@drawable/normal_bg"></item>
-</selector>
-
-```
-
-设置个background，上面一个状态为android:state_checked，另一个为正常。写写布局文件我都嫌慢，怎么能写一堆代码控制效果，设置改个效果，岂不是没时间dota了。
-
-
-###事件
-
-```java
-mFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener()
-{
-  @Override
-  public boolean onTagClick(View view, int position, FlowLayout parent)
-  {
-      Toast.makeText(getActivity(), mVals[position], Toast.LENGTH_SHORT).show();
-      return true;
-  }
-});
-```
 
