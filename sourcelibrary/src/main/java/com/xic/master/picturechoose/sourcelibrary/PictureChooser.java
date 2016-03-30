@@ -1,6 +1,7 @@
 package com.xic.master.picturechoose.sourcelibrary;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,7 +11,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.util.Log;
 
@@ -22,8 +22,8 @@ import java.io.IOException;
 
 /**
  * ProjectName: PictureChoose
- * Describe: å›¾ç‰‡é€‰æ‹©å™¨
- * Author: ç†Šå»ºæ˜Œ
+ * Describe: Í¼Æ¬Ñ¡ÔñÆ÷
+ * Author: ĞÜ½¨²ı
  * Date: 2016/3/16 10:07
  * Email: jianchang1230@163.com
  * QQ: 939635660
@@ -33,15 +33,15 @@ public class PictureChooser {
 
     private static final String TAG = "PictureChooser";
     /**
-     * ä»ç›¸å†Œé€‰æ‹©
+     * ´ÓÏà²áÑ¡Ôñ
      */
     private final int PIC_GALLERY_REQUESTCODE = 10101;
     /**
-     * æ‰“å¼€ç›¸æœºæ‹ç…§
+     * ´ò¿ªÏà»úÅÄÕÕ
      */
     private final int PIC_CAMERA_REQUESTCODE = 10102;
     /**
-     * è£å‰ªå›¾ç‰‡
+     * ²Ã¼ôÍ¼Æ¬
      */
     private final int PIC_CLIP_REQUESTCODE = 10103;
 
@@ -49,7 +49,7 @@ public class PictureChooser {
     private Fragment mFragment;
 
     /**
-     * å›¾ç‰‡åå­—   tempä¸ºé»˜è®¤å€¼
+     * Í¼Æ¬Ãû×Ö   tempÎªÄ¬ÈÏÖµ
      */
     private String cameraPicName = "temp.jpg";
     private File tempFile;
@@ -59,46 +59,46 @@ public class PictureChooser {
     private String fileDir = "pic";
 
     /**
-     * æ˜¯å¦è£åˆ‡
+     * ÊÇ·ñ²ÃÇĞ
      */
     private boolean isClip = false;
 
     /**
-     * æ˜¯å¦å‹ç¼©
+     * ÊÇ·ñÑ¹Ëõ
      */
     private boolean isCompressor = false;
     /**
-     * åˆ‡å›¾ å®½é«˜æ¯”ä¾‹
+     * ÇĞÍ¼ ¿í¸ß±ÈÀı
      */
     private int aspectX = 1;
     private int aspectY = 1;
     /**
-     * è¾“å‡ºå›¾ç‰‡å®½é«˜
+     * Êä³öÍ¼Æ¬¿í¸ß
      */
     private int outputX = 0;
     private int outputY = 0;
     /**
-     * å‹ç¼©å›¾ç‰‡æœ€å¤§è´¨é‡
+     * Ñ¹ËõÍ¼Æ¬×î´óÖÊÁ¿
      */
     private int maxkb = 0;
     /**
-     * å‹ç¼©å›¾ç‰‡å®½é«˜
+     * Ñ¹ËõÍ¼Æ¬¿í¸ß
      */
     private int reqWidth = 0;
     private int reqHeight = 0;
     /**
-     * è®°å½•æ—¶é—´æˆ³
+     * ¼ÇÂ¼Ê±¼ä´Á
      */
     private long currentTimeMillis = 0;
     /**
-     * è®¾ç½®ç¼“å­˜åšå¤š3å¼ 
+     * ÉèÖÃ»º´æ×ö¶à3ÕÅ
      */
     private int maxFile = 3;
 
     private OnPicturePickListener mOnPicturePickListener;
 
     /**
-     * å›¾ç‰‡é€‰æ‹©æ–¹å¼
+     * Í¼Æ¬Ñ¡Ôñ·½Ê½
      */
     private PictureFrom mPictureFrom = PictureFrom.CAMERA;
 
@@ -156,9 +156,9 @@ public class PictureChooser {
     }
 
     /**
-     * å¼€å§‹æ‰§è¡Œé€‰æ‹©å›¾ç‰‡æ“ä½œ
+     * ¿ªÊ¼Ö´ĞĞÑ¡ÔñÍ¼Æ¬²Ù×÷
      *
-     * @param listener
+     * @param listener Ö´ĞĞÊÂ¼şµÄ¼àÌı
      */
     public void execute(OnPicturePickListener listener) {
         if (null == listener) {
@@ -173,10 +173,10 @@ public class PictureChooser {
     }
 
     /**
-     * æ‰“å¼€ç›¸æœº
+     * ´ò¿ªÏà»ú
      */
     protected void openCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//æ‹æ‘„ç…§ç‰‡
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//ÅÄÉãÕÕÆ¬
         cameraFilePath = tempFile.getPath() + File.separator + currentTimeMillis + cameraPicName;
         Uri uri = Uri.parse("file://" + cameraFilePath);
 //        Uri uri = Uri.fromFile(new File(cameraFilePath));
@@ -198,9 +198,9 @@ public class PictureChooser {
     }
 
     /**
-     * åˆ¤æ–­ç¼“å­˜çš„æ–‡ä»¶æ˜¯ä¸æ˜¯è¶…æ ‡äº†
+     * ÅĞ¶Ï»º´æµÄÎÄ¼şÊÇ²»ÊÇ³¬±êÁË
      *
-     * @return
+     * @return ÊÇ·ñ³¬¹ı»º´æ×î´óÖµ ture³¬¹ı falseÃ»ÓĞ
      */
     protected boolean isHaseMaxFile() {
         if (tempFile.isDirectory()) {
@@ -221,9 +221,9 @@ public class PictureChooser {
     }
 
     /**
-     * æ¸…é™¤ç¼“å­˜
+     * Çå³ı»º´æ
      *
-     * @return
+     * @return   Çå³ı»º´æÊÇ·ñ³É¹¦
      */
     protected boolean clearPics() {
         boolean state = true;
@@ -248,10 +248,10 @@ public class PictureChooser {
     }
 
     /**
-     * åˆ é™¤å›¾ç‰‡
+     * É¾³ıÍ¼Æ¬
      *
-     * @param file
-     * @return
+     * @param file ÒªÉ¾³ıµÄÍ¼Æ¬µØÖ·
+     * @return É¾³ı²Ù×÷ÊÇ·ñ³É¹¦
      */
     protected boolean delPic(File file) {
         boolean state = false;
@@ -265,19 +265,19 @@ public class PictureChooser {
     }
 
     /**
-     * ä»ç›¸å†Œé€‰æ‹©
+     * ´ÓÏà²áÑ¡Ôñ
      */
     protected void galleryPic() {
-        // Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);//ç…§ç‰‡
-        Intent intent = new Intent(Intent.ACTION_PICK, null);//ç…§ç‰‡
+        // Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);//ÕÕÆ¬
+        Intent intent = new Intent(Intent.ACTION_PICK, null);//ÕÕÆ¬
         intent.setType("image/*");
         startActivityForResult(intent, PIC_GALLERY_REQUESTCODE);
     }
 
     /**
-     * åˆ‡å›¾
+     * ÇĞÍ¼
      *
-     * @param uri
+     * @param uri ÒªÇĞÍ¼µÄÎÄ¼şÓ³ÉäµØÖ·
      */
     private void startPhotoClip(Uri uri) {
         if (tempFile.isDirectory()) {
@@ -287,35 +287,35 @@ public class PictureChooser {
         }
         Log.i(TAG, "url" + clipFilePath);
         // Uri uri1 = Uri.parse(clipFilePath);
-        Uri uri1 = Uri.fromFile(new File(clipFilePath));   //ä¸€äº›æ‰‹æ©Ÿåªèƒ½ç”¨fromFileè™•ç†ï¼Œå¦å‰‡æœƒè¼¸å‡ºç”Ÿæˆä¸äº†åœ–ç‰‡
+        Uri uri1 = Uri.fromFile(new File(clipFilePath));   //Ò»Ğ©ÊÖ™CÖ»ÄÜÓÃfromFileÌÀí£¬·ñ„t•şİ”³öÉú³É²»ÁËˆDÆ¬
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
-        // cropä¸ºtrueæ˜¯è®¾ç½®åœ¨å¼€å¯çš„intentä¸­è®¾ç½®æ˜¾ç¤ºçš„viewå¯ä»¥å‰ªè£
+        // cropÎªtrueÊÇÉèÖÃÔÚ¿ªÆôµÄintentÖĞÉèÖÃÏÔÊ¾µÄview¿ÉÒÔ¼ô²Ã
         intent.putExtra("crop", "true");
-        // aspectX aspectY æ˜¯å®½é«˜çš„æ¯”ä¾‹
+        // aspectX aspectY ÊÇ¿í¸ßµÄ±ÈÀı
         if (aspectX > 0 && aspectY > 0) {
             intent.putExtra("aspectX", aspectX);
             intent.putExtra("aspectY", aspectY);
         } else if (aspectX == 0 && aspectY == 0) {
-            //0å°±ä¸åšå¤„ç†ï¼Œåˆ‡å‰²æ¯”ä¾‹ä¸é™åˆ¶
+            //0¾Í²»×ö´¦Àí£¬ÇĞ¸î±ÈÀı²»ÏŞÖÆ
         } else {
             intent.putExtra("aspectX", 1);
             intent.putExtra("aspectY", 1);
         }
         if (outputX > 0 && outputY > 0) {
-            // outputX,outputY æ˜¯å‰ªè£å›¾ç‰‡çš„å®½é«˜
+            // outputX,outputY ÊÇ¼ô²ÃÍ¼Æ¬µÄ¿í¸ß
             intent.putExtra("outputX", outputX);
             intent.putExtra("outputY", outputY);
         }
-        intent.putExtra("return-data", false);//æ˜¯å¦é€šè¿‡//å›è°ƒæ–¹æ³•data.getExtras().getParcelable("data") falseè¿”å›æ•°æ®ä¸ºç©º
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri1);//å›¾åƒè¾“å‡º
+        intent.putExtra("return-data", false);//ÊÇ·ñÍ¨¹ı//»Øµ÷·½·¨data.getExtras().getParcelable("data") false·µ»ØÊı¾İÎª¿Õ
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri1);//Í¼ÏñÊä³ö
         startActivityForResult(intent, PIC_CLIP_REQUESTCODE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             /**
-             * ç›¸æœº
+             * Ïà»ú
              */
             case PIC_CAMERA_REQUESTCODE:
                 if (resultCode == Activity.RESULT_OK) {
@@ -332,13 +332,13 @@ public class PictureChooser {
                 }
                 break;
             /**
-             * ç›¸å†Œé€‰æ‹©
+             * Ïà²áÑ¡Ôñ
              */
             case PIC_GALLERY_REQUESTCODE:
                 if (data != null) {
-                    //å–å¾—è¿”å›çš„Uri,åŸºæœ¬ä¸Šé€‰æ‹©ç…§ç‰‡çš„æ—¶å€™è¿”å›çš„æ˜¯ä»¥Uriå½¢å¼ï¼Œä½†æ˜¯åœ¨æ‹ç…§ä¸­æœ‰å¾—æœºå­å‘¢Uriæ˜¯ç©ºçš„ï¼Œæ‰€ä»¥è¦ç‰¹åˆ«æ³¨æ„
+                    //È¡µÃ·µ»ØµÄUri,»ù±¾ÉÏÑ¡ÔñÕÕÆ¬µÄÊ±ºò·µ»ØµÄÊÇÒÔUriĞÎÊ½£¬µ«ÊÇÔÚÅÄÕÕÖĞÓĞµÃ»ú×ÓÄØUriÊÇ¿ÕµÄ£¬ËùÒÔÒªÌØ±ğ×¢Òâ
                     Uri uri = data.getData();
-                    //è¿”å›çš„Uriä¸ä¸ºç©ºæ—¶ï¼Œé‚£ä¹ˆå›¾ç‰‡ä¿¡æ¯æ•°æ®éƒ½ä¼šåœ¨Uriä¸­è·å¾—ã€‚å¦‚æœä¸ºç©ºï¼Œé‚£ä¹ˆæˆ‘ä»¬å°±è¿›è¡Œä¸‹é¢çš„æ–¹å¼è·å–
+                    //·µ»ØµÄUri²»Îª¿ÕÊ±£¬ÄÇÃ´Í¼Æ¬ĞÅÏ¢Êı¾İ¶¼»áÔÚUriÖĞ»ñµÃ¡£Èç¹ûÎª¿Õ£¬ÄÇÃ´ÎÒÃÇ¾Í½øĞĞÏÂÃæµÄ·½Ê½»ñÈ¡
                     if (uri != null) {
                         if (isClip) {
                             startPhotoClip(uri);
@@ -349,7 +349,7 @@ public class PictureChooser {
                     } else {
                         Bundle extras = data.getExtras();
                         if (extras != null) {
-                            //è¿™é‡Œæ˜¯æœ‰äº›æ‹ç…§åçš„å›¾ç‰‡æ˜¯ç›´æ¥å­˜æ”¾åˆ°Bundleä¸­çš„æ‰€ä»¥æˆ‘ä»¬å¯ä»¥ä»è¿™é‡Œé¢è·å–Bitmapå›¾ç‰‡
+                            //ÕâÀïÊÇÓĞĞ©ÅÄÕÕºóµÄÍ¼Æ¬ÊÇÖ±½Ó´æ·Åµ½BundleÖĞµÄËùÒÔÎÒÃÇ¿ÉÒÔ´ÓÕâÀïÃæ»ñÈ¡BitmapÍ¼Æ¬
                             Bitmap image = extras.getParcelable("data");
                         }
                     }
@@ -357,7 +357,7 @@ public class PictureChooser {
                 }
                 break;
             /**
-             * ç¼©æ”¾å
+             * Ëõ·Åºó
              */
             case PIC_CLIP_REQUESTCODE:
                 if (null != data || resultCode == Activity.RESULT_OK) {
@@ -367,7 +367,7 @@ public class PictureChooser {
                     }
                     Log.i(TAG, "clipFilePath " + clipFilePath);
                     File endFile = new File(clipFilePath);
-                    Log.i(TAG, "fileå¤§å°" + endFile.length());
+                    Log.i(TAG, "file´óĞ¡" + endFile.length());
                     senCompressorFile(clipFilePath);
                 }
                 break;
@@ -375,10 +375,10 @@ public class PictureChooser {
     }
 
     /**
-     * data.getData() uri è½¬çœŸå®è·¯å¾„
+     * data.getData() uri ×ªÕæÊµÂ·¾¶
      *
-     * @param contentUri
-     * @return
+     * @param contentUri Òª×ª»»µÄÓ³ÉäµØÖ·
+     * @return ×ª»»ºóµÄÎÄ¼şÂ·¾¶
      */
     public String getRealPathFromURI(Uri contentUri) {
         String res = contentUri.getPath();
@@ -394,9 +394,9 @@ public class PictureChooser {
     }
 
     /**
-     * è·å–å›¾ç‰‡å‹ç¼©å¤„ç†
+     * »ñÈ¡Í¼Æ¬Ñ¹Ëõ´¦Àí
      *
-     * @param filePath
+     * @param filePath Í¼Æ¬µØÖ·
      */
     protected void senCompressorFile(final String filePath) {
         Log.i(TAG, filePath);
@@ -413,7 +413,11 @@ public class PictureChooser {
 
 
     /**
-     * è®¡ç®—å›¾ç‰‡çš„ç¼©æ”¾å€¼
+     * ¼ÆËãÍ¼Æ¬µÄËõ·ÅÖµ
+     * @param options Ëõ·Å²ÎÊı
+     * @param reqWidth ¿í
+     * @param reqHeight ¸ß
+     * @return ±ÈÀı
      */
     public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         final int height = options.outHeight;
@@ -428,8 +432,12 @@ public class PictureChooser {
     }
 
     /**
-     * å°ºå¯¸å‹ç¼©
-     * æ ¹æ®è·¯å¾„è·å¾—å›¾ç‰‡å¹¶å‹ç¼©ï¼Œè¿”å›bitmapç”¨äºæ˜¾ç¤º
+     * ³ß´çÑ¹Ëõ
+     * ¸ù¾İÂ·¾¶»ñµÃÍ¼Æ¬²¢Ñ¹Ëõ£¬·µ»ØbitmapÓÃÓÚÏÔÊ¾
+     * @param filePath Í¼Æ¬µØÖ·
+     * @param reqWidth Ñ¹ËõºóµÄÍ¼Æ¬¿í
+     * @param reqHeight Ñ¹ËõºóµÄÍ¼Æ¬¸ß
+     * @return Ñ¹ËõºóµÄÍ¼Æ¬
      */
     public Bitmap getSmallBitmap(String filePath, int reqWidth, int reqHeight) {
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -443,8 +451,11 @@ public class PictureChooser {
     }
 
     /**
-     * å°ºå¯¸å‹ç¼©
-     * æ ¹æ®è·¯å¾„è·å¾—å›¾ç‰‡å¹¶å‹ç¼©ï¼Œè¿”å›bitmapç”¨äºæ˜¾ç¤º
+     * ³ß´çÑ¹Ëõ
+     * ¸ù¾İÂ·¾¶»ñµÃÍ¼Æ¬²¢Ñ¹Ëõ£¬·µ»ØbitmapÓÃÓÚÏÔÊ¾
+     * @param filePath Í¼Æ¬µØÖ·
+     * @param inSampleSize Ñ¹Ëõ±ÈÀı
+     * @return Ñ¹ËõºóµÄÍ¼Æ¬
      */
     public Bitmap getSmallBitmap(String filePath, int inSampleSize) {
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -460,39 +471,42 @@ public class PictureChooser {
     }
 
     /**
-     * è´¨é‡å‹ç¼©
+     * ÖÊÁ¿Ñ¹Ëõ
+     * @param image ÒªÑ¹ËõµÄÎÄ¼ş
+     * @param maxkb Ñ¹Ëõºó×î´ó´óĞ¡
+     * @param filePath Ñ¹ËõºóÎÄ¼ş´æ·ÅµØÖ·
      */
     public void compressBitmap(Bitmap image, int maxkb, String filePath) {
-        Log.i(TAG, "åŸå§‹bitmapå¤§å°" + getBitmapSize(image));
+        Log.i(TAG, "Ô­Ê¼bitmap´óĞ¡" + getBitmapSize(image));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);// è´¨é‡å‹ç¼©æ–¹æ³•ï¼Œè¿™é‡Œ100è¡¨ç¤ºä¸å‹ç¼©ï¼ŒæŠŠå‹ç¼©åçš„æ•°æ®å­˜æ”¾åˆ°baosä¸­
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);// ÖÊÁ¿Ñ¹Ëõ·½·¨£¬ÕâÀï100±íÊ¾²»Ñ¹Ëõ£¬°ÑÑ¹ËõºóµÄÊı¾İ´æ·Åµ½baosÖĞ
         int options = 100;
-        Log.i(TAG, "åŸå§‹å¤§å°" + baos.toByteArray().length);
-        while (baos.toByteArray().length / 1024 > maxkb) { // å¾ªç¯åˆ¤æ–­å¦‚æœå‹ç¼©åå›¾ç‰‡æ˜¯å¦å¤§äº(maxkb)50kb,å¤§äºç»§ç»­å‹ç¼©
-            Log.i(TAG, "å‹ç¼©ä¸€æ¬¡!  options " + options + "  " + baos.toByteArray().length);
-            baos.reset();// é‡ç½®baoså³æ¸…ç©ºbaos
-            options -= 10;// æ¯æ¬¡éƒ½å‡å°‘10
-            image.compress(Bitmap.CompressFormat.JPEG, options, baos);// è¿™é‡Œå‹ç¼©options%ï¼ŒæŠŠå‹ç¼©åçš„æ•°æ®å­˜æ”¾åˆ°baosä¸­
+        Log.i(TAG, "Ô­Ê¼´óĞ¡" + baos.toByteArray().length);
+        while (baos.toByteArray().length / 1024 > maxkb) { // Ñ­»·ÅĞ¶ÏÈç¹ûÑ¹ËõºóÍ¼Æ¬ÊÇ·ñ´óÓÚ(maxkb)50kb,´óÓÚ¼ÌĞøÑ¹Ëõ
+            Log.i(TAG, "Ñ¹ËõÒ»´Î!  options " + options + "  " + baos.toByteArray().length);
+            baos.reset();// ÖØÖÃbaos¼´Çå¿Õbaos
+            options -= 10;// Ã¿´Î¶¼¼õÉÙ10
+            image.compress(Bitmap.CompressFormat.JPEG, options, baos);// ÕâÀïÑ¹Ëõoptions%£¬°ÑÑ¹ËõºóµÄÊı¾İ´æ·Åµ½baosÖĞ
         }
-        Log.i(TAG, "å‹ç¼©å‚æ•°options" + options);
-        Log.i(TAG, "å‹ç¼©åå¤§å°" + baos.toByteArray().length);
-        Log.i(TAG, "å‹ç¼©åbitmapå¤§å°" + getBitmapSize(image));
-//        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// æŠŠå‹ç¼©åçš„æ•°æ®baoså­˜æ”¾åˆ°ByteArrayInputStreamä¸­
-//        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);// æŠŠByteArrayInputStreamæ•°æ®ç”Ÿæˆå›¾ç‰‡
+        Log.i(TAG, "Ñ¹Ëõ²ÎÊıoptions" + options);
+        Log.i(TAG, "Ñ¹Ëõºó´óĞ¡" + baos.toByteArray().length);
+        Log.i(TAG, "Ñ¹Ëõºóbitmap´óĞ¡" + getBitmapSize(image));
+//        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// °ÑÑ¹ËõºóµÄÊı¾İbaos´æ·Åµ½ByteArrayInputStreamÖĞ
+//        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);// °ÑByteArrayInputStreamÊı¾İÉú³ÉÍ¼Æ¬
 //        File file = cf(options, bitmap);
         bitmapToFile(options, image, filePath);
-        // å¦‚æœå›¾ç‰‡è¿˜æ²¡æœ‰å›æ”¶ï¼Œå¼ºåˆ¶å›æ”¶
+        // Èç¹ûÍ¼Æ¬»¹Ã»ÓĞ»ØÊÕ£¬Ç¿ÖÆ»ØÊÕ
         if (!image.isRecycled()) {
-            Log.i(TAG, "å›æ”¶äº†image");
+            Log.i(TAG, "»ØÊÕÁËimage");
             image.recycle();
         }
     }
 
     /**
-     * è·å–bitmapå¤§å°
+     * »ñÈ¡bitmap´óĞ¡
      *
-     * @param bitmap
-     * @return
+     * @param bitmap Òª¼ÆËãµÄÍ¼Æ¬ÎÄ¼ş
+     * @return Í¼Æ¬µÄÖÊÁ¿´óĞ¡
      */
     public int getBitmapSize(Bitmap bitmap) {
         if (null == bitmap)
@@ -507,11 +521,10 @@ public class PictureChooser {
     }
 
     /**
-     * ç›´æ¥bitmapå‹ç¼©æˆæ–‡ä»¶
-     *
-     * @param options
-     * @param bitmap
-     * @return
+     * Ö±½ÓbitmapÑ¹Ëõ³ÉÎÄ¼ş
+     * @param options Ñ¹ËõµÄãĞÖµ
+     * @param bitmap ÒªÑ¹ËõµÄÍ¼Æ¬
+     * @param filePath Ñ¹ËõºóÎÄ¼ş´æ·ÅµØÖ·
      */
     private void bitmapToFile(int options, Bitmap bitmap, String filePath) {
         try {
@@ -521,11 +534,11 @@ public class PictureChooser {
             Log.i(TAG, filePath);
             fos.flush();
             fos.close();
-            //å‹ç¼©æˆåŠŸå›è°ƒ
+            //Ñ¹Ëõ³É¹¦»Øµ÷
             compressorSuccess(filePath);
-            // å¦‚æœå›¾ç‰‡è¿˜æ²¡æœ‰å›æ”¶ï¼Œå¼ºåˆ¶å›æ”¶
+            // Èç¹ûÍ¼Æ¬»¹Ã»ÓĞ»ØÊÕ£¬Ç¿ÖÆ»ØÊÕ
             if (!bitmap.isRecycled()) {
-                Log.i(TAG, "å›æ”¶äº†bitmap");
+                Log.i(TAG, "»ØÊÕÁËbitmap");
                 bitmap.recycle();
             }
         } catch (FileNotFoundException e) {
@@ -536,27 +549,32 @@ public class PictureChooser {
     }
 
     /**
-     * æŠŠbitmapè½¬æ¢æˆString
+     * °Ñbitmap×ª»»³ÉString
+     * @param filePath Í¼Æ¬µØÖ·
+     * @param reqWidth ×ª»»ºóµÄÍ¼Æ¬¿í
+     * @param reqHeight ×ª»»ºóµÄÍ¼Æ¬¸ß
+     * @return 64Î»µÄÍ¼Æ¬ÎÄ¼ş
      */
     public String bitmapToString(String filePath, int reqWidth, int reqHeight) {
         Bitmap bm = getSmallBitmap(filePath, reqWidth, reqHeight);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 40, baos);
         byte[] b = baos.toByteArray();
-        // å¦‚æœå›¾ç‰‡è¿˜æ²¡æœ‰å›æ”¶ï¼Œå¼ºåˆ¶å›æ”¶
+        // Èç¹ûÍ¼Æ¬»¹Ã»ÓĞ»ØÊÕ£¬Ç¿ÖÆ»ØÊÕ
         if (!bm.isRecycled()) {
-            Log.i(TAG, "å›æ”¶äº†bm");
+            Log.i(TAG, "»ØÊÕÁËbm");
             bm.recycle();
         }
         return Base64.encodeToString(b, Base64.DEFAULT);
     }
 
     /**
-     * æŠŠå›¾ç‰‡æ–‡ä»¶å‹ç¼©
+     * °ÑÍ¼Æ¬ÎÄ¼şÑ¹Ëõ
+     * @param filePath Í¼Æ¬µØÖ·
      */
     public void fileCompressor(String filePath) {
         File endFile = new File(filePath);
-        Log.i(TAG, "fileå¤§å°" + endFile.length());
+        Log.i(TAG, "file´óĞ¡" + endFile.length());
         if (0 == maxkb) {
             bitmapToFile(100, getSmallBitmap(filePath, reqWidth, reqHeight), filePath);
         } else if (0 == reqWidth || 0 == reqHeight) {
@@ -575,7 +593,7 @@ public class PictureChooser {
     }
 
     /**
-     * é‡ç½®é€‰æ‹©æ•°æ®
+     * ÖØÖÃÑ¡ÔñÊı¾İ
      */
     public void reset() {
         this.cameraPicName = "temp.jpg";
@@ -592,9 +610,9 @@ public class PictureChooser {
     }
 
     /**
-     * è·å–å›¾ç‰‡åè§¦å‘
+     * »ñÈ¡Í¼Æ¬ºó´¥·¢
      *
-     * @param filePath
+     * @param filePath Í¼Æ¬µØÖ·
      */
     protected void senFile(String filePath) {
         if (null != mOnPicturePickListener) {
@@ -603,7 +621,8 @@ public class PictureChooser {
     }
 
     /**
-     * å‹ç¼©åè§¦å‘
+     * Ñ¹Ëõºó´¥·¢
+     * @param filePath Í¼Æ¬µØÖ·
      */
     protected void compressorSuccess(String filePath) {
         if (null != mOnPicturePickListener) {

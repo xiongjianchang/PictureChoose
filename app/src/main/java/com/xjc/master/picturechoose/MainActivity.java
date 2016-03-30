@@ -2,13 +2,11 @@ package com.xjc.master.picturechoose;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -16,8 +14,8 @@ import com.xic.master.picturechoose.sourcelibrary.PictureChooser;
 
 /**
  * ProjectName: PictureChoose
- * Describe: å›¾ç‰‡é€‰æ‹©å™¨æ“ä½œæ¡ˆä¾‹
- * Author: ç†Šå»ºæ˜Œ
+ * Describe: Í¼Æ¬Ñ¡ÔñÆ÷²Ù×÷°¸Àı
+ * Author: ĞÜ½¨²ı
  * Date: 2016/3/16 10:20
  * Email: jianchang1230@163.com
  * QQ: 939635660
@@ -27,12 +25,11 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView imgAddPhoto;
 
-    private String photoPath = null; //è®°å½•å¤´åƒåœ°å€ï¼Œè¦ä¸Šä¼ çš„æ—¶å€™å¯ä»¥å°†åœ°å€è¯»æˆæ–‡ä»¶ä¸Šä¼ 
+    private String photoPath = null; //¼ÇÂ¼Í·ÏñµØÖ·£¬ÒªÉÏ´«µÄÊ±ºò¿ÉÒÔ½«µØÖ·¶Á³ÉÎÄ¼şÉÏ´«
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("error", "onCreate");
         setContentView(R.layout.activity_main);
         findViews();
         setListeners();
@@ -55,49 +52,49 @@ public class MainActivity extends AppCompatActivity {
     PictureChooser pictureChooser;
 
     /**
-     * æ˜¾ç¤ºé€‰æ‹©å›¾ç‰‡çš„çª—å£
+     * ÏÔÊ¾Ñ¡ÔñÍ¼Æ¬µÄ´°¿Ú
      */
     private void showChoosePictureDialog() {
-        final String[] pictureFrom = {"æ‹ç…§ä¸Šä¼ ", "ç›¸å†Œé€‰æ‹©"};
+        final String[] pictureFrom = {"ÅÄÕÕÉÏ´«", "Ïà²áÑ¡Ôñ"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("è¯·é€‰æ‹©å›¾ç‰‡æ¥æº");
+        builder.setTitle("ÇëÑ¡ÔñÍ¼Æ¬À´Ô´");
         builder.setItems(pictureFrom, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (null == pictureChooser) {
                     pictureChooser = new PictureChooser(MainActivity.this);
-                    //å›¾ç‰‡åç§°ï¼Œä¼šåšå­˜å‚¨
+                    //Í¼Æ¬Ãû³Æ£¬»á×ö´æ´¢
                     pictureChooser.setCameraPicName("headPhoto.jpg");
-                    //æ˜¯å¦è£å‰ªï¼Œè£å‰ªçš„æ¯”ä¾‹å’Œå®½é«˜
+                    //ÊÇ·ñ²Ã¼ô£¬²Ã¼ôµÄ±ÈÀıºÍ¿í¸ß
                     pictureChooser.setIsClip(true, 1, 1, 0, 0);
-                    //æ˜¯å¦å‹ç¼©ï¼Œå‹ç¼©åçš„æœ€å¤§è´¨é‡ï¼ˆå•ä½kbï¼‰å’Œå›¾ç‰‡å®½é«˜
+                    //ÊÇ·ñÑ¹Ëõ£¬Ñ¹ËõºóµÄ×î´óÖÊÁ¿£¨µ¥Î»kb£©ºÍÍ¼Æ¬¿í¸ß
                     pictureChooser.setIsCompressor(true, 500, 240, 240);
                 }
                 if (0 == which) {
-                    //è®¾ç½®é€‰æ‹©ç›¸æœº
+                    //ÉèÖÃÑ¡ÔñÏà»ú
                     pictureChooser.setmPictureFrom(PictureChooser.PictureFrom.CAMERA);
                 }
                 if (1 == which) {
-                    //è®¾ç½®é€‰æ‹©ç›¸å†Œ
+                    //ÉèÖÃÑ¡ÔñÏà²á
                     pictureChooser.setmPictureFrom(PictureChooser.PictureFrom.GALLERY);
                 }
                 pictureChooser.execute(new PictureChooser.OnPicturePickListener() {
                     /**
-                     * è¿™é‡Œæ˜¯è·å–åˆ°å›¾ç‰‡è·¯å¾„
-                     * @param filePath é€‰ä¸­çš„å›¾ç‰‡åœ¨æ‰‹æœºæ–‡ä»¶ç³»ç»Ÿé‡Œçš„è·¯å¾„
+                     * ÕâÀïÊÇ»ñÈ¡µ½Í¼Æ¬Â·¾¶
+                     * @param filePath Ñ¡ÖĞµÄÍ¼Æ¬ÔÚÊÖ»úÎÄ¼şÏµÍ³ÀïµÄÂ·¾¶
                      */
                     @Override
                     public void senFile(String filePath) {
-                        //è¿™é‡Œæ”¹æˆè‡ªå·±çš„å›¾ç‰‡åŠ è½½æ¡†æ¶ï¼Œæˆ‘åªæ˜¯ç®€å•åšä¸€ä¸‹æ¡ˆä¾‹
+                        //ÕâÀï¸Ä³É×Ô¼ºµÄÍ¼Æ¬¼ÓÔØ¿ò¼Ü£¬ÎÒÖ»ÊÇ¼òµ¥×öÒ»ÏÂ°¸Àı
                         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
                         imgAddPhoto.setImageBitmap(bitmap);
-                        //æŠŠå›¾ç‰‡è·¯å¾„å­˜å‚¨èµ·æ¥ï¼Œä¸Šä¼ çš„æ—¶å€™è¦ç”¨åˆ°
+                        //°ÑÍ¼Æ¬Â·¾¶´æ´¢ÆğÀ´£¬ÉÏ´«µÄÊ±ºòÒªÓÃµ½
                         photoPath = filePath;
                     }
 
                     /**
-                     * å¦‚æœæœ‰åšå‹ç¼©å¤„ç†ï¼Œè¿™é‡Œä¼šè¿”å›å‹ç¼©åçš„è·¯å¾„
-                     * @param filePath é€‰ä¸­çš„å›¾ç‰‡åœ¨æ‰‹æœºæ–‡ä»¶ç³»ç»Ÿé‡Œçš„è·¯å¾„
+                     * Èç¹ûÓĞ×öÑ¹Ëõ´¦Àí£¬ÕâÀï»á·µ»ØÑ¹ËõºóµÄÂ·¾¶
+                     * @param filePath Ñ¡ÖĞµÄÍ¼Æ¬ÔÚÊÖ»úÎÄ¼şÏµÍ³ÀïµÄÂ·¾¶
                      */
                     @Override
                     public void compressorSuccess(String filePath) {
@@ -106,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-        builder.setNegativeButton("å–æ¶ˆ", null);
+        builder.setNegativeButton("È¡Ïû", null);
         builder.setCancelable(false);
         builder.show();
     }
@@ -114,35 +111,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //è¦åšé¡µé¢å›è°ƒçš„å“åº”å¤„ç†ï¼ŒæŠŠæ“ä½œçš„æ•°æ®ä¼ ç»™å›¾ç‰‡é€‰æ‹©æ“ä½œç±»
-        if (pictureChooser == null) {
-            Log.e("error", "pictureChooser==null");
-        } else {
-            pictureChooser.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            // land do nothing is ok
-            Log.e("error", "land");
-            if (pictureChooser == null) {
-                Log.e("error", "pictureChooser==null  land");
-            }
-        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            // port do nothing is ok
-            Log.e("error", "port");
-            if (pictureChooser == null) {
-                Log.e("error", "pictureChooser==null  port");
-            }
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.e("test", "onDestroy");
+        //Òª×öÒ³Ãæ»Øµ÷µÄÏìÓ¦´¦Àí£¬°Ñ²Ù×÷µÄÊı¾İ´«¸øÍ¼Æ¬Ñ¡Ôñ²Ù×÷Àà
+        pictureChooser.onActivityResult(requestCode, resultCode, data);
     }
 }

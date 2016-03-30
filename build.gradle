@@ -3,6 +3,7 @@
 buildscript {
     repositories {
         jcenter()
+        maven { url "http://dl.bintray.com/xiongjianchang/maven" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
@@ -22,3 +23,8 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+////设置编码
+//tasks.withType(JavaCompile) {
+//    options.encoding = "UTF-8"
+//}
