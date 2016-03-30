@@ -2,6 +2,10 @@
 Choose from camera or photo album pictures。图片选择来源于相机或相册。
 
 
+### 鸣谢
+项目是在[chcdg](https://github.com/chcdg)大神的代码上进行完善的，关注大神更多项目请猛戳[这里](https://github.com/chcdg)。
+
+
 ##特色
 * 以工具类的形式集成于项目里面
 * 直接实例化对象，并设置其属性就定制选择图片的需求
