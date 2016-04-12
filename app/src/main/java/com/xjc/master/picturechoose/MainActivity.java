@@ -14,8 +14,8 @@ import com.xic.master.picturechoose.sourcelibrary.PictureChooser;
 
 /**
  * ProjectName: PictureChoose
- * Describe: Í¼Æ¬Ñ¡ÔñÆ÷²Ù×÷°¸Àı
- * Author: ĞÜ½¨²ı
+ * Describe: å›¾ç‰‡é€‰æ‹©å™¨æ“ä½œæ¡ˆä¾‹
+ * Author: ç†Šå»ºæ˜Œ
  * Date: 2016/3/16 10:20
  * Email: jianchang1230@163.com
  * QQ: 939635660
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView imgAddPhoto;
 
-    private String photoPath = null; //¼ÇÂ¼Í·ÏñµØÖ·£¬ÒªÉÏ´«µÄÊ±ºò¿ÉÒÔ½«µØÖ·¶Á³ÉÎÄ¼şÉÏ´«
+    private String photoPath = null; //è®°å½•å¤´åƒåœ°å€ï¼Œè¦ä¸Šä¼ çš„æ—¶å€™å¯ä»¥å°†åœ°å€è¯»æˆæ–‡ä»¶ä¸Šä¼ 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,49 +52,49 @@ public class MainActivity extends AppCompatActivity {
     PictureChooser pictureChooser;
 
     /**
-     * ÏÔÊ¾Ñ¡ÔñÍ¼Æ¬µÄ´°¿Ú
+     * æ˜¾ç¤ºé€‰æ‹©å›¾ç‰‡çš„çª—å£
      */
     private void showChoosePictureDialog() {
-        final String[] pictureFrom = {"ÅÄÕÕÉÏ´«", "Ïà²áÑ¡Ôñ"};
+        final String[] pictureFrom = {"æ‹ç…§ä¸Šä¼ ", "ç›¸å†Œé€‰æ‹©"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("ÇëÑ¡ÔñÍ¼Æ¬À´Ô´");
+        builder.setTitle("è¯·é€‰æ‹©å›¾ç‰‡æ¥æº");
         builder.setItems(pictureFrom, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (null == pictureChooser) {
                     pictureChooser = new PictureChooser(MainActivity.this);
-                    //Í¼Æ¬Ãû³Æ£¬»á×ö´æ´¢
+                    //å›¾ç‰‡åç§°ï¼Œä¼šåšå­˜å‚¨
                     pictureChooser.setCameraPicName("headPhoto.jpg");
-                    //ÊÇ·ñ²Ã¼ô£¬²Ã¼ôµÄ±ÈÀıºÍ¿í¸ß
+                    //æ˜¯å¦è£å‰ªï¼Œè£å‰ªçš„æ¯”ä¾‹å’Œå®½é«˜
                     pictureChooser.setIsClip(true, 1, 1, 0, 0);
-                    //ÊÇ·ñÑ¹Ëõ£¬Ñ¹ËõºóµÄ×î´óÖÊÁ¿£¨µ¥Î»kb£©ºÍÍ¼Æ¬¿í¸ß
+                    //æ˜¯å¦å‹ç¼©ï¼Œå‹ç¼©åçš„æœ€å¤§è´¨é‡ï¼ˆå•ä½kbï¼‰å’Œå›¾ç‰‡å®½é«˜
                     pictureChooser.setIsCompressor(true, 500, 240, 240);
                 }
                 if (0 == which) {
-                    //ÉèÖÃÑ¡ÔñÏà»ú
+                    //è®¾ç½®é€‰æ‹©ç›¸æœº
                     pictureChooser.setmPictureFrom(PictureChooser.PictureFrom.CAMERA);
                 }
                 if (1 == which) {
-                    //ÉèÖÃÑ¡ÔñÏà²á
+                    //è®¾ç½®é€‰æ‹©ç›¸å†Œ
                     pictureChooser.setmPictureFrom(PictureChooser.PictureFrom.GALLERY);
                 }
                 pictureChooser.execute(new PictureChooser.OnPicturePickListener() {
                     /**
-                     * ÕâÀïÊÇ»ñÈ¡µ½Í¼Æ¬Â·¾¶
-                     * @param filePath Ñ¡ÖĞµÄÍ¼Æ¬ÔÚÊÖ»úÎÄ¼şÏµÍ³ÀïµÄÂ·¾¶
+                     * è¿™é‡Œæ˜¯è·å–åˆ°å›¾ç‰‡è·¯å¾„
+                     * @param filePath é€‰ä¸­çš„å›¾ç‰‡åœ¨æ‰‹æœºæ–‡ä»¶ç³»ç»Ÿé‡Œçš„è·¯å¾„
                      */
                     @Override
                     public void senFile(String filePath) {
-                        //ÕâÀï¸Ä³É×Ô¼ºµÄÍ¼Æ¬¼ÓÔØ¿ò¼Ü£¬ÎÒÖ»ÊÇ¼òµ¥×öÒ»ÏÂ°¸Àı
+                        //è¿™é‡Œæ”¹æˆè‡ªå·±çš„å›¾ç‰‡åŠ è½½æ¡†æ¶ï¼Œæˆ‘åªæ˜¯ç®€å•åšä¸€ä¸‹æ¡ˆä¾‹
                         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
                         imgAddPhoto.setImageBitmap(bitmap);
-                        //°ÑÍ¼Æ¬Â·¾¶´æ´¢ÆğÀ´£¬ÉÏ´«µÄÊ±ºòÒªÓÃµ½
+                        //æŠŠå›¾ç‰‡è·¯å¾„å­˜å‚¨èµ·æ¥ï¼Œä¸Šä¼ çš„æ—¶å€™è¦ç”¨åˆ°
                         photoPath = filePath;
                     }
 
                     /**
-                     * Èç¹ûÓĞ×öÑ¹Ëõ´¦Àí£¬ÕâÀï»á·µ»ØÑ¹ËõºóµÄÂ·¾¶
-                     * @param filePath Ñ¡ÖĞµÄÍ¼Æ¬ÔÚÊÖ»úÎÄ¼şÏµÍ³ÀïµÄÂ·¾¶
+                     * å¦‚æœæœ‰åšå‹ç¼©å¤„ç†ï¼Œè¿™é‡Œä¼šè¿”å›å‹ç¼©åçš„è·¯å¾„
+                     * @param filePath é€‰ä¸­çš„å›¾ç‰‡åœ¨æ‰‹æœºæ–‡ä»¶ç³»ç»Ÿé‡Œçš„è·¯å¾„
                      */
                     @Override
                     public void compressorSuccess(String filePath) {
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-        builder.setNegativeButton("È¡Ïû", null);
+        builder.setNegativeButton("å–æ¶ˆ", null);
         builder.setCancelable(false);
         builder.show();
     }
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //Òª×öÒ³Ãæ»Øµ÷µÄÏìÓ¦´¦Àí£¬°Ñ²Ù×÷µÄÊı¾İ´«¸øÍ¼Æ¬Ñ¡Ôñ²Ù×÷Àà
+        //è¦åšé¡µé¢å›è°ƒçš„å“åº”å¤„ç†ï¼ŒæŠŠæ“ä½œçš„æ•°æ®ä¼ ç»™å›¾ç‰‡é€‰æ‹©æ“ä½œç±»
         pictureChooser.onActivityResult(requestCode, resultCode, data);
     }
 }

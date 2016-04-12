@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="sourcelibrary-1.0.1">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.xjc.master.picturechoose/sourcelibrary/1.0.1/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.xjc.master.picturechoose/sourcelibrary/1.0.1/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.xjc.master.picturechoose/sourcelibrary/1.0.1/eb0138d823421739f43aa16600f5b6e7a0c48c20/sourcelibrary-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

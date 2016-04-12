@@ -12,7 +12,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -22,8 +21,8 @@ import java.io.IOException;
 
 /**
  * ProjectName: PictureChoose
- * Describe: 图片选择器
- * Author: 熊建昌
+ * Describe: Image selector
+ * Author: xiongjianchang
  * Date: 2016/3/16 10:07
  * Email: jianchang1230@163.com
  * QQ: 939635660
@@ -33,15 +32,15 @@ public class PictureChooser {
 
     private static final String TAG = "PictureChooser";
     /**
-     * 从相册选择
+     * From the album to choose
      */
     private final int PIC_GALLERY_REQUESTCODE = 10101;
     /**
-     * 打开相机拍照
+     * Open the camera take pictures
      */
     private final int PIC_CAMERA_REQUESTCODE = 10102;
     /**
-     * 裁剪图片
+     * Cut out pictures
      */
     private final int PIC_CLIP_REQUESTCODE = 10103;
 
@@ -49,7 +48,7 @@ public class PictureChooser {
     private Fragment mFragment;
 
     /**
-     * 图片名字   temp为默认值
+     * Image name temp to default values
      */
     private String cameraPicName = "temp.jpg";
     private File tempFile;
@@ -59,46 +58,46 @@ public class PictureChooser {
     private String fileDir = "pic";
 
     /**
-     * 是否裁切
+     * Whether the cutting
      */
     private boolean isClip = false;
 
     /**
-     * 是否压缩
+     * Whether the compression
      */
     private boolean isCompressor = false;
     /**
-     * 切图 宽高比例
+     * Cut the figure wide high percentage
      */
     private int aspectX = 1;
     private int aspectY = 1;
     /**
-     * 输出图片宽高
+     * Wide high output images
      */
     private int outputX = 0;
     private int outputY = 0;
     /**
-     * 压缩图片最大质量
+     * Compressed images maximum quality
      */
     private int maxkb = 0;
     /**
-     * 压缩图片宽高
+     * Wide high compressed images
      */
     private int reqWidth = 0;
     private int reqHeight = 0;
     /**
-     * 记录时间戳
+     * Record the timestamp
      */
     private long currentTimeMillis = 0;
     /**
-     * 设置缓存做多3张
+     * Do more than 3 set cache
      */
     private int maxFile = 3;
 
     private OnPicturePickListener mOnPicturePickListener;
 
     /**
-     * 图片选择方式
+     * Image option
      */
     private PictureFrom mPictureFrom = PictureFrom.CAMERA;
 
@@ -156,9 +155,9 @@ public class PictureChooser {
     }
 
     /**
-     * 开始执行选择图片操作
+     * Began to perform select image manipulation
      *
-     * @param listener 执行事件的监听
+     * @param listener Perform event listening in
      */
     public void execute(OnPicturePickListener listener) {
         if (null == listener) {
@@ -173,10 +172,10 @@ public class PictureChooser {
     }
 
     /**
-     * 打开相机
+     * open camera
      */
     protected void openCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//拍摄照片
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//Take Picture
         cameraFilePath = tempFile.getPath() + File.separator + currentTimeMillis + cameraPicName;
         Uri uri = Uri.parse("file://" + cameraFilePath);
 //        Uri uri = Uri.fromFile(new File(cameraFilePath));
@@ -198,15 +197,15 @@ public class PictureChooser {
     }
 
     /**
-     * 判断缓存的文件是不是超标了
+     * The judgment of the cache file is overweight
      *
-     * @return 是否超过缓存最大值 ture超过 false没有
+     * @return If more than a maximum cache true than false do not have
      */
     protected boolean isHaseMaxFile() {
         if (tempFile.isDirectory()) {
             if (null != tempFile.listFiles() && tempFile.listFiles().length >= maxFile) {
                 // File[] files = tempFile.listFiles();
-                Log.i(TAG, tempFile.listFiles().length + "");
+//                Log.i(TAG, tempFile.listFiles().length + "");
                 return true;
             } else {
                 return false;
@@ -221,9 +220,9 @@ public class PictureChooser {
     }
 
     /**
-     * 清除缓存
+     * wipe cache partition
      *
-     * @return   清除缓存是否成功
+     * @return Clear the cache was successful
      */
     protected boolean clearPics() {
         boolean state = true;
@@ -248,10 +247,10 @@ public class PictureChooser {
     }
 
     /**
-     * 删除图片
+     * delete image
      *
-     * @param file 要删除的图片地址
-     * @return 删除操作是否成功
+     * @param file To delete pictures of address
+     * @return Delete operation was successful
      */
     protected boolean delPic(File file) {
         boolean state = false;
@@ -265,19 +264,19 @@ public class PictureChooser {
     }
 
     /**
-     * 从相册选择
+     * From the album to choose
      */
     protected void galleryPic() {
-        // Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);//照片
-        Intent intent = new Intent(Intent.ACTION_PICK, null);//照片
+        // Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);//picture
+        Intent intent = new Intent(Intent.ACTION_PICK, null);//picture
         intent.setType("image/*");
         startActivityForResult(intent, PIC_GALLERY_REQUESTCODE);
     }
 
     /**
-     * 切图
+     * Cut The Photo
      *
-     * @param uri 要切图的文件映射地址
+     * @param uri To cut the figure file mapping address
      */
     private void startPhotoClip(Uri uri) {
         if (tempFile.isDirectory()) {
@@ -285,37 +284,38 @@ public class PictureChooser {
         } else {
             clipFilePath = tempFile.getParent() + File.separator + System.currentTimeMillis() + cameraPicName;
         }
-        Log.i(TAG, "url" + clipFilePath);
+//        Log.i(TAG, "url" + clipFilePath);
         // Uri uri1 = Uri.parse(clipFilePath);
-        Uri uri1 = Uri.fromFile(new File(clipFilePath));   //一些手機只能用fromFile處理，否則會輸出生成不了圖片
+        Uri uri1 = Uri.fromFile(new File(clipFilePath));   //Some phones can only use fromFile processing, otherwise it will output become a picture
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
-        // crop为true是设置在开启的intent中设置显示的view可以剪裁
+        // crop to true is display Settings in open the intent of the view can be cut
         intent.putExtra("crop", "true");
-        // aspectX aspectY 是宽高的比例
+        // aspectX aspectY Is wide high proportion
         if (aspectX > 0 && aspectY > 0) {
             intent.putExtra("aspectX", aspectX);
             intent.putExtra("aspectY", aspectY);
         } else if (aspectX == 0 && aspectY == 0) {
-            //0就不做处理，切割比例不限制
+            //0 just don't do processing, cutting the proportion does not limit
         } else {
             intent.putExtra("aspectX", 1);
             intent.putExtra("aspectY", 1);
         }
         if (outputX > 0 && outputY > 0) {
-            // outputX,outputY 是剪裁图片的宽高
+            // outputX,outputY Wide, high is cut images
             intent.putExtra("outputX", outputX);
             intent.putExtra("outputY", outputY);
         }
-        intent.putExtra("return-data", false);//是否通过//回调方法data.getExtras().getParcelable("data") false返回数据为空
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri1);//图像输出
+        intent.putExtra("return-data", false);//passed
+        //callback method       data.getExtras().getParcelable("data") false Return the data is empty
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri1);//image output
         startActivityForResult(intent, PIC_CLIP_REQUESTCODE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             /**
-             * 相机
+             * camera
              */
             case PIC_CAMERA_REQUESTCODE:
                 if (resultCode == Activity.RESULT_OK) {
@@ -332,13 +332,13 @@ public class PictureChooser {
                 }
                 break;
             /**
-             * 相册选择
+             * Photo album to choose
              */
             case PIC_GALLERY_REQUESTCODE:
                 if (data != null) {
-                    //取得返回的Uri,基本上选择照片的时候返回的是以Uri形式，但是在拍照中有得机子呢Uri是空的，所以要特别注意
+                    //Returns the Uri of the, basically choose photos when the returned in the form of a Uri, but in the photo you machine Uri is empty, so it is important to pay special attention to
                     Uri uri = data.getData();
-                    //返回的Uri不为空时，那么图片信息数据都会在Uri中获得。如果为空，那么我们就进行下面的方式获取
+                    //Returns the Uri is not null, then image information data will be obtained in the Uri. If is empty, then we will get the following way
                     if (uri != null) {
                         if (isClip) {
                             startPhotoClip(uri);
@@ -349,7 +349,7 @@ public class PictureChooser {
                     } else {
                         Bundle extras = data.getExtras();
                         if (extras != null) {
-                            //这里是有些拍照后的图片是直接存放到Bundle中的所以我们可以从这里面获取Bitmap图片
+                            //Here are some pictures after the image is directly deposited into the Bundle so we can get Bitmap images from there
                             Bitmap image = extras.getParcelable("data");
                         }
                     }
@@ -357,17 +357,17 @@ public class PictureChooser {
                 }
                 break;
             /**
-             * 缩放后
+             * After scaling
              */
             case PIC_CLIP_REQUESTCODE:
                 if (null != data || resultCode == Activity.RESULT_OK) {
                     if (null == clipFilePath) {
                         clipFilePath = getRealPathFromURI(data.getData());
-                        Log.i(TAG, clipFilePath);
+//                        Log.i(TAG, clipFilePath);
                     }
-                    Log.i(TAG, "clipFilePath " + clipFilePath);
+//                    Log.i(TAG, "clipFilePath " + clipFilePath);
                     File endFile = new File(clipFilePath);
-                    Log.i(TAG, "file大小" + endFile.length());
+//                    Log.i(TAG, "file size" + endFile.length());
                     senCompressorFile(clipFilePath);
                 }
                 break;
@@ -375,14 +375,14 @@ public class PictureChooser {
     }
 
     /**
-     * data.getData() uri 转真实路径
+     * data.getData() uri Turn the real path
      *
-     * @param contentUri 要转换的映射地址
-     * @return 转换后的文件路径
+     * @param contentUri Want to convert the address mapping
+     * @return The converted file path
      */
     public String getRealPathFromURI(Uri contentUri) {
         String res = contentUri.getPath();
-        Log.e(TAG, contentUri.getPath());
+//        Log.e(TAG, contentUri.getPath());
         String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = mContext.getContentResolver().query(contentUri, proj, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
@@ -394,12 +394,12 @@ public class PictureChooser {
     }
 
     /**
-     * 获取图片压缩处理
+     * For image compression processing
      *
-     * @param filePath 图片地址
+     * @param filePath Picture address
      */
     protected void senCompressorFile(final String filePath) {
-        Log.i(TAG, filePath);
+//        Log.i(TAG, filePath);
         senFile(filePath);
         if (isCompressor) {
             new Thread(new Runnable() {
@@ -413,11 +413,12 @@ public class PictureChooser {
 
 
     /**
-     * 计算图片的缩放值
-     * @param options 缩放参数
-     * @param reqWidth 宽
-     * @param reqHeight 高
-     * @return 比例
+     * Calculate the scale value of the picture
+     *
+     * @param options   Scaling parameter
+     * @param reqWidth  wide
+     * @param reqHeight high
+     * @return ratio
      */
     public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         final int height = options.outHeight;
@@ -432,12 +433,13 @@ public class PictureChooser {
     }
 
     /**
-     * 尺寸压缩
-     * 根据路径获得图片并压缩，返回bitmap用于显示
-     * @param filePath 图片地址
-     * @param reqWidth 压缩后的图片宽
-     * @param reqHeight 压缩后的图片高
-     * @return 压缩后的图片
+     * Size of the compression
+     * According to the path to obtain images and compression, return to the bitmap is used to display
+     *
+     * @param filePath  Picture address
+     * @param reqWidth  Wide compressed images
+     * @param reqHeight High compressed images
+     * @return Compressed images
      */
     public Bitmap getSmallBitmap(String filePath, int reqWidth, int reqHeight) {
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -451,11 +453,12 @@ public class PictureChooser {
     }
 
     /**
-     * 尺寸压缩
-     * 根据路径获得图片并压缩，返回bitmap用于显示
-     * @param filePath 图片地址
-     * @param inSampleSize 压缩比例
-     * @return 压缩后的图片
+     * Size of the compression
+     * According to the path to obtain images and compression, return to the bitmap is used to display
+     *
+     * @param filePath     Picture address
+     * @param inSampleSize compression ratio
+     * @return Compressed images
      */
     public Bitmap getSmallBitmap(String filePath, int inSampleSize) {
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -471,42 +474,43 @@ public class PictureChooser {
     }
 
     /**
-     * 质量压缩
-     * @param image 要压缩的文件
-     * @param maxkb 压缩后最大大小
-     * @param filePath 压缩后文件存放地址
+     * quality compression
+     *
+     * @param image    To compress the file
+     * @param maxkb    Maximum size after compression
+     * @param filePath Compressed file storage address
      */
     public void compressBitmap(Bitmap image, int maxkb, String filePath) {
-        Log.i(TAG, "原始bitmap大小" + getBitmapSize(image));
+//        Log.i(TAG, "The original size of the bitmap" + getBitmapSize(image));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);// Quality compression method, 100 said here without compression, the compressed data stored in the baos
         int options = 100;
-        Log.i(TAG, "原始大小" + baos.toByteArray().length);
-        while (baos.toByteArray().length / 1024 > maxkb) { // 循环判断如果压缩后图片是否大于(maxkb)50kb,大于继续压缩
-            Log.i(TAG, "压缩一次!  options " + options + "  " + baos.toByteArray().length);
-            baos.reset();// 重置baos即清空baos
-            options -= 10;// 每次都减少10
-            image.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
+//        Log.i(TAG, "original size" + baos.toByteArray().length);
+        while (baos.toByteArray().length / 1024 > maxkb) { // Cycle to judge if the compressed image is greater than 50 KB (maxkb), greater than continue to compress
+//            Log.i(TAG, "A compression!  options " + options + "  " + baos.toByteArray().length);
+            baos.reset();// Reset the baos namely empty baos
+            options -= 10;// Reduce 10 every time
+            image.compress(Bitmap.CompressFormat.JPEG, options, baos);// Compression options here %, the compressed data stored in the baos
         }
-        Log.i(TAG, "压缩参数options" + options);
-        Log.i(TAG, "压缩后大小" + baos.toByteArray().length);
-        Log.i(TAG, "压缩后bitmap大小" + getBitmapSize(image));
-//        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// 把压缩后的数据baos存放到ByteArrayInputStream中
-//        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);// 把ByteArrayInputStream数据生成图片
+//        Log.i(TAG, "Compression parameter options" + options);
+//        Log.i(TAG, "Compressed size" + baos.toByteArray().length);
+//        Log.i(TAG, "After the compression bitmap size" + getBitmapSize(image));
+//        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// The compressed data baos deposit into a ByteArrayInputStream
+//        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);// The ByteArrayInputStream data generated images
 //        File file = cf(options, bitmap);
         bitmapToFile(options, image, filePath);
-        // 如果图片还没有回收，强制回收
+        // If the picture is not recycled, compulsory recycling
         if (!image.isRecycled()) {
-            Log.i(TAG, "回收了image");
+            // Log.i(TAG, "recycled image");
             image.recycle();
         }
     }
 
     /**
-     * 获取bitmap大小
+     * The bitmap size using
      *
-     * @param bitmap 要计算的图片文件
-     * @return 图片的质量大小
+     * @param bitmap To calculate the image files
+     * @return The quality of the image size
      */
     public int getBitmapSize(Bitmap bitmap) {
         if (null == bitmap)
@@ -521,24 +525,25 @@ public class PictureChooser {
     }
 
     /**
-     * 直接bitmap压缩成文件
-     * @param options 压缩的阈值
-     * @param bitmap 要压缩的图片
-     * @param filePath 压缩后文件存放地址
+     * Bitmap directly compressed into a file
+     *
+     * @param options  The threshold of compression
+     * @param bitmap   To compress the image
+     * @param filePath Compressed file storage address
      */
     private void bitmapToFile(int options, Bitmap bitmap, String filePath) {
         try {
             FileOutputStream fos = null;
             fos = new FileOutputStream(filePath);
             bitmap.compress(Bitmap.CompressFormat.JPEG, options, fos);
-            Log.i(TAG, filePath);
+//            Log.i(TAG, filePath);
             fos.flush();
             fos.close();
-            //压缩成功回调
+            //Compression success callback
             compressorSuccess(filePath);
-            // 如果图片还没有回收，强制回收
+            // If the picture is not recycled, compulsory recycling
             if (!bitmap.isRecycled()) {
-                Log.i(TAG, "回收了bitmap");
+                // Log.i(TAG, "recycled bitmap");
                 bitmap.recycle();
             }
         } catch (FileNotFoundException e) {
@@ -549,32 +554,34 @@ public class PictureChooser {
     }
 
     /**
-     * 把bitmap转换成String
-     * @param filePath 图片地址
-     * @param reqWidth 转换后的图片宽
-     * @param reqHeight 转换后的图片高
-     * @return 64位的图片文件
+     * The bitmap is transformed into a String
+     *
+     * @param filePath  Picture address
+     * @param reqWidth  The transformed image width
+     * @param reqHeight The transformed image is high
+     * @return A 64 - bit image files
      */
     public String bitmapToString(String filePath, int reqWidth, int reqHeight) {
         Bitmap bm = getSmallBitmap(filePath, reqWidth, reqHeight);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 40, baos);
         byte[] b = baos.toByteArray();
-        // 如果图片还没有回收，强制回收
+        // If the picture is not recycled, compulsory recycling
         if (!bm.isRecycled()) {
-            Log.i(TAG, "回收了bm");
+            // Log.i(TAG, "recycled bm");
             bm.recycle();
         }
         return Base64.encodeToString(b, Base64.DEFAULT);
     }
 
     /**
-     * 把图片文件压缩
-     * @param filePath 图片地址
+     * The image file compression
+     *
+     * @param filePath Picture address
      */
     public void fileCompressor(String filePath) {
         File endFile = new File(filePath);
-        Log.i(TAG, "file大小" + endFile.length());
+//        Log.i(TAG, "file size" + endFile.length());
         if (0 == maxkb) {
             bitmapToFile(100, getSmallBitmap(filePath, reqWidth, reqHeight), filePath);
         } else if (0 == reqWidth || 0 == reqHeight) {
@@ -593,7 +600,7 @@ public class PictureChooser {
     }
 
     /**
-     * 重置选择数据
+     * Reset the selection data
      */
     public void reset() {
         this.cameraPicName = "temp.jpg";
@@ -610,9 +617,9 @@ public class PictureChooser {
     }
 
     /**
-     * 获取图片后触发
+     * Get photo after the trigger
      *
-     * @param filePath 图片地址
+     * @param filePath Picture address
      */
     protected void senFile(String filePath) {
         if (null != mOnPicturePickListener) {
@@ -621,8 +628,9 @@ public class PictureChooser {
     }
 
     /**
-     * 压缩后触发
-     * @param filePath 图片地址
+     * Compressed trigger
+     *
+     * @param filePath Picture address
      */
     protected void compressorSuccess(String filePath) {
         if (null != mOnPicturePickListener) {
