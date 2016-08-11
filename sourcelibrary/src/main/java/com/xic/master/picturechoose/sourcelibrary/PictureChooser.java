@@ -1,7 +1,6 @@
 package com.xic.master.picturechoose.sourcelibrary;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
@@ -291,8 +291,13 @@ public class PictureChooser {
         intent.setDataAndType(uri, "image/*");
         // crop to true is display Settings in open the intent of the view can be cut
         intent.putExtra("crop", "true");
+
         // aspectX aspectY Is wide high proportion
-        if (aspectX > 0 && aspectY > 0) {
+        if (aspectX == aspectY && android.os.Build.MANUFACTURER.contains("HUAWEI")) {
+            //HUAWEI special treatment will not show round
+            intent.putExtra("aspectX", 9998);
+            intent.putExtra("aspectY", 9999);
+        } else if (aspectX > 0 && aspectY > 0) {
             intent.putExtra("aspectX", aspectX);
             intent.putExtra("aspectY", aspectY);
         } else if (aspectX == 0 && aspectY == 0) {
@@ -649,5 +654,9 @@ public class PictureChooser {
 
     public enum PictureFrom {
         GALLERY, CAMERA
+    }
+
+    public static class Builder {
+
     }
 }

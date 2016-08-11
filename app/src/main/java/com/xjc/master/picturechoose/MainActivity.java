@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     //图片名称，会做存储
                     pictureChooser.setCameraPicName("headPhoto.jpg");
                     //是否裁剪，裁剪的比例和宽高
-                    pictureChooser.setIsClip(true, 1, 1, 0, 0);
+                    pictureChooser.setIsClip(true, 2, 3, 0, 0);
                     //是否压缩，压缩后的最大质量（单位kb）和图片宽高
                     pictureChooser.setIsCompressor(true, 500, 240, 240);
                 }
