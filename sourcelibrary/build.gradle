@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/xiongjianchang/PictureChoose'
     gitUrl = 'https://github.com/xiongjianchang/PictureChoose.git'
 
-    libraryVersion = '1.0.2'
+    libraryVersion = '1.0.3'
 
     developerId = 'xiongjianchang'
     developerName = '大熊'
@@ -32,8 +32,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "1.0.3"
     }
     buildTypes {
         release {
