@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
@@ -119,9 +120,13 @@ public class PictureChooser {
         } else {
             this.mContext = (Activity) context;
         }
-        if (android.os.Environment.getExternalStorageState().equals(
-                android.os.Environment.MEDIA_MOUNTED)) {
-            this.tempFile = new File(mContext.getExternalCacheDir().getPath() + File.separator + fileDir);
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            try {
+                this.tempFile = new File(mContext.getExternalCacheDir().getPath() + File.separator + fileDir);
+            } catch (Exception e) {
+                e.printStackTrace();
+                this.tempFile = new File(mContext.getCacheDir().getPath() + File.separator + fileDir);
+            }
         } else {
             this.tempFile = new File(mContext.getCacheDir().getPath() + File.separator + fileDir);
         }
@@ -293,7 +298,7 @@ public class PictureChooser {
         intent.putExtra("crop", "true");
 
         // aspectX aspectY Is wide high proportion
-        if (aspectX == aspectY && android.os.Build.MANUFACTURER.contains("HUAWEI")) {
+        if (aspectX == aspectY && aspectX != 0 && android.os.Build.MANUFACTURER.contains("HUAWEI")) {
             //HUAWEI special treatment will not show round
             intent.putExtra("aspectX", 9998);
             intent.putExtra("aspectY", 9999);
@@ -371,7 +376,7 @@ public class PictureChooser {
 //                        Log.i(TAG, clipFilePath);
                     }
 //                    Log.i(TAG, "clipFilePath " + clipFilePath);
-                    File endFile = new File(clipFilePath);
+//                    File endFile = new File(clipFilePath);
 //                    Log.i(TAG, "file size" + endFile.length());
                     senCompressorFile(clipFilePath);
                 }
